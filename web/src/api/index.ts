@@ -1,5 +1,6 @@
+
 export const AddNewBlog = async (params)=>{
-  return await fetch('http://localhost:8000/api/addBlog', {
+  return await fetch('https://ziming.online/ideal/api/addBlog', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
@@ -11,5 +12,5 @@ export const AddNewBlog = async (params)=>{
 
 
 export const GetBlogList = async ()=>{
-    return await fetch('http://localhost:8000/api/queryBlogs').then(response => response.json())
+    return await fetch('https://ziming.online/ideal/api/queryBlogs').then(response => response.json())
   }
