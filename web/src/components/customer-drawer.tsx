@@ -1,8 +1,8 @@
 import { ReactSVG } from 'react-svg'
-import BookSvg from './imgs/svgs/book.svg'
+import BookSvg from '@imgs/book.svg'
 import { useToggle } from 'ahooks';
 import { Drawer} from 'antd'
-import * as Api from './api'
+import * as Api from '../api'
 import { useEffect, useState } from 'react';
 
 const CustomerDrawer = ()=>{

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const PORT = 8000;
 const app = express()
+require('dotenv').config()
 const DB = require('./sqlite')
 
 DB.createTable()

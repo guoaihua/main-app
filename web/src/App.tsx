@@ -3,7 +3,7 @@ import './App.scss';
 import { marked } from 'marked'
 import 'antd/dist/reset.css';
 import { Input, Button } from 'antd'
-import Drawer from './drawer'
+import Drawer from '@components/customer-drawer'
 import  * as Api from './api/index'
 
 function App() {

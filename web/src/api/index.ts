@@ -1,6 +1,8 @@
 
+const domain = import.meta.env?.VITE_API_DOMAIN || ''
+
 export const AddNewBlog = async (params)=>{
-  return await fetch('https://ziming.online/ideal/api/addBlog', {
+  return await fetch(domain + '/ideal/api/addBlog', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
@@ -12,5 +14,5 @@ export const AddNewBlog = async (params)=>{
 
 
 export const GetBlogList = async ()=>{
-    return await fetch('https://ziming.online/ideal/api/queryBlogs').then(response => response.json())
+    return await fetch(domain+'/api/queryBlogs').then(response => response.json())
   }
