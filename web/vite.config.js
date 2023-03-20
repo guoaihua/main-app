@@ -8,7 +8,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@components': resolve(__dirname, 'src', 'components'),
-      "@imgs/*":resolve(__dirname, 'src', 'imgs'),
+      "@imgs":resolve(__dirname, 'src', 'imgs'),
+      "@views": resolve(__dirname, 'src', 'views'),
       '@utils': resolve(__dirname, 'src', 'utils'),
       '@config': resolve(__dirname, 'src', 'config'),
     },

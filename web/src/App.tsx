@@ -1,64 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
-import { marked } from 'marked'
-import 'antd/dist/reset.css';
-import { Input, Button } from 'antd'
-import Drawer from '@components/customer-drawer'
-import  * as Api from './api/index'
+import { Avatar, Menu } from 'antd';
+import personal_avatar from '@imgs/avatar.jpg';
+import type { MenuProps } from 'antd';
+import {
+  RouterProvider,
+  Link,
+   Route,
+   Routes
+} from "react-router-dom";
+import { router } from "./route";
 
 function App() {
-  const [inputText, setInputText] = useState('')
-  const [title, setTile] = useState('')
-  const [parsedData, setParsedData] = useState({
-    __html: ''
-  })
 
-  useEffect(()=>{
-    setParsedData({
-      __html: marked.parse(inputText)
-    })
-  },[inputText])
+    const menuItems: MenuProps['items'] = [
+        {
+            label: <Routes><Route path='idea'>主页</Route></Routes>,
+            key: 'home',
+        },
+        {
+            label: '随记',
+            key: 'ideal',
+            
+        }
+    ]
 
-const handleSubmit = async ()=>{
-  if(title && inputText && parsedData){
-    const res = await Api?.AddNewBlog({
-      title,
-      content: inputText,
-      parseContent: parsedData.__html
-    })
-    console.log(res)
-  }
-}
-  
   return (
     <div className="App">
-      <div className="input-container">
-        <div className="menu" >
-          <Drawer />
-          <div className='title'>
-              标题：<Input type='text' value={title} onChange={(e)=>setTile(e.target.value)}></Input>
-          </div>
-        </div>
-        <Input.TextArea        
-          value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            placeholder="Controlled autosize"
-            style={{
-              height: '100%',
-              resize: 'none'
-            }}
-          />
+      <div className="personal_info">
+        <Avatar size={200} src={personal_avatar} />
+        <h1>Ziming Home</h1>
+        <p>这是一个自由的空间</p>
       </div>
-      <div className="out-container" >
-       <div className="menu">
-       <div className='save-blog'>
-            <Button type='primary' onClick={handleSubmit}>保存当前文档</Button>
-        </div>
-       </div>
-        <div className="render-container" dangerouslySetInnerHTML={parsedData}>
-        </div>
+      <div className="work_container">
+        <Menu items={menuItems}/>
       </div>
-
     </div>
   );
 }
