@@ -7,7 +7,8 @@ import {
   RouterProvider,
   Link,
    Route,
-   Routes
+   Routes, 
+   Outlet
 } from "react-router-dom";
 import { router } from "./route";
 
@@ -15,7 +16,7 @@ function App() {
 
     const menuItems: MenuProps['items'] = [
         {
-            label: <Routes><Route path='idea'>主页</Route></Routes>,
+            label: <Link to='./ideal'>主页</Link>,
             key: 'home',
         },
         {
@@ -34,6 +35,7 @@ function App() {
       </div>
       <div className="work_container">
         <Menu items={menuItems}/>
+        <Outlet />
       </div>
     </div>
   );

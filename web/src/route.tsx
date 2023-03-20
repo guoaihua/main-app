@@ -14,9 +14,9 @@ import {
         element: <App />,
         children: [
             {
-                path: 'idea',
+                path: 'ideal',
                 element: <Ideal />
             }
         ]
-     }
+     },
   ])
