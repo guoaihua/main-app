@@ -2,7 +2,7 @@
 const domain = import.meta.env?.VITE_API_DOMAIN || ''
 
 export const AddNewBlog = async (params)=>{
-  return await fetch(domain + '/ideal/api/addBlog', {
+  return await fetch(domain + '/api/addBlog', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'

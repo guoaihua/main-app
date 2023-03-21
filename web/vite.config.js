@@ -10,6 +10,7 @@ export default defineConfig({
       '@components': resolve(__dirname, 'src', 'components'),
       "@imgs":resolve(__dirname, 'src', 'imgs'),
       "@views": resolve(__dirname, 'src', 'views'),
+      "@api": resolve(__dirname, 'src', 'api'),
       '@utils': resolve(__dirname, 'src', 'utils'),
       '@config': resolve(__dirname, 'src', 'config'),
     },

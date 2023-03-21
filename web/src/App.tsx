@@ -16,11 +16,11 @@ function App() {
 
     const menuItems: MenuProps['items'] = [
         {
-            label: <Link to='./ideal'>主页</Link>,
+            label: <Link to='./'>主页</Link>,
             key: 'home',
         },
         {
-            label: '随记',
+            label:  <Link to='./personal'>个人</Link>,
             key: 'ideal',
             
         }
@@ -34,7 +34,7 @@ function App() {
         <p>这是一个自由的空间</p>
       </div>
       <div className="work_container">
-        <Menu items={menuItems}/>
+        <Menu items={menuItems} mode='horizontal'/>
         <Outlet />
       </div>
     </div>

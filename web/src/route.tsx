@@ -4,7 +4,7 @@ import {
     Route,
     Link,
   } from "react-router-dom";
-  import Home from '@views/home/index';
+  import HomeCardList from '@views/home/index';
   import Ideal from '@views/ideal'
   import App from './App'
 
@@ -14,9 +14,17 @@ import {
         element: <App />,
         children: [
             {
-                path: 'ideal',
-                element: <Ideal />
+                path: '/',
+                element: <HomeCardList />
+            },
+            {
+                path: 'personal',
+                element: <>personal</>  
             }
         ]
      },
+     {
+        path: 'ideal',
+        element: <Ideal />
+    }
   ])

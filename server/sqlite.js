@@ -5,7 +5,7 @@ var db = new sqlite3.Database(file);
 
 // 初始化表
 const createTable = function(){
-    const sql = db.prepare('create table if not exists blogs(id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT, content TEXT, parseContent TEXT)')
+    const sql = db.prepare('create table if not exists blogs(id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT, content TEXT, parseContent TEXT, labels TEXT, update_time INTEGER)')
     sql.run()
 }
 

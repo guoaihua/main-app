@@ -36,7 +36,7 @@ app.get('/api/queryBlogs', async (req,res)=>{
 app.post('/api/addBlog', (req, res)=>{
     if(req.body){
         const value = Object.keys(req.body).map( i => req.body[i])
-        DB.insertData('insert into blogs(title, content, parseContent) values(?,?,?)', [value])
+        DB.insertData('insert into blogs(title, content, parseContent, labels, update_time) values(?,?,?,?,?)', [value])
         res.send(value)
     }
 })
