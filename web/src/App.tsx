@@ -16,11 +16,11 @@ function App() {
 
     const menuItems: MenuProps['items'] = [
         {
-            label: <Link to='./'>主页</Link>,
+            label: <Link to='./'>11</Link>,
             key: 'home',
         },
         {
-            label:  <Link to='./personal'>个人</Link>,
+            label:  <Link to='./personal'>22</Link>,
             key: 'ideal',
             
         }
