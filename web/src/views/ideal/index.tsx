@@ -3,14 +3,15 @@ import React, { useEffect, useState } from 'react';
 import './index.scss';
 import { marked } from 'marked'
 import 'antd/dist/reset.css';
-import { Input, Button } from 'antd'
+import { Input, Button, message } from 'antd'
 import Drawer from '@components/customer-drawer'
 import  * as Api from '../../api/index'
+import MakeLabels from '@components/make-labels';
 
 const Editor = ()=>{
     const [inputText, setInputText] = useState('')
     const [title, setTile] = useState('')
-    const [label, setLabel] = useState('')
+    const [label, setLabel] = useState([])
     const [parsedData, setParsedData] = useState({
       __html: ''
     })
@@ -27,10 +28,18 @@ const Editor = ()=>{
         title,
         content: inputText,
         parseContent: parsedData.__html,
-        labels: label,
+        labels: label.join(';'),
         updateTime: Date.now()
       })
-      console.log(res)
+      if(res){
+        message.success('保存成功')
+        setInputText('')
+        setTile('')
+        setLabel([])
+        setParsedData({
+          __html: ''
+        })
+      }
     }
   }
     return (
@@ -52,19 +61,15 @@ const Editor = ()=>{
             }}
           />
       </div>
-      <div className="out-container" >
-       <div className="menu">
-       <div className='save-blog'>
-          <div className='title'>
-                标签：<Input type='text' value={label} onChange={(e)=>setLabel(e.target.value)}></Input>
+        <div className="out-container" >
+            <div className="menu">
+                <MakeLabels onChange={(data)=> setLabel(data)}/>
+                <Button className=' ml-2 h-9' onClick={handleSubmit}>保存当前文档</Button>
+            </div>
+            <div className="render-container" dangerouslySetInnerHTML={parsedData}>
           </div>
-            <Button type='primary' onClick={handleSubmit}>保存当前文档</Button>
-        </div>
-       </div>
-        <div className="render-container" dangerouslySetInnerHTML={parsedData}>
         </div>
       </div>
-        </div>
     )
 }
 

@@ -20,7 +20,7 @@ import {
             },
             {
                 path: 'personal',
-                element: <div><Labels /></div>  
+                element: <div className=" w-1/2"><Labels /></div>  
             }
         ]
      },

@@ -7,28 +7,63 @@
  * @returns 
  */
 
-import {useState, useRef, useEffect, useCallback} from 'react'
+import React, {useState, useRef, useEffect, useCallback } from 'react'
 import CloseIcon from '@imgs/close.svg'
+import CopyIcon from '@imgs/copy.svg'
+import { message } from 'antd'
+export interface MakeLabelsProps {
+    onChange?: (labels)=> void
+}
 
-const MakeLabels = ()=>{
+const MakeLabels: React.FC<MakeLabelsProps> = (props)=>{
+    const { onChange } = props
     const [labels, setLabels] = useState([])
     const [inputValue, setInputValue] = useState('')
 
+    const deleteLabels = (e)=>{
+        const elementTarget = e.target as HTMLElement
+        if(elementTarget?.tagName?.toLowerCase() === 'img'){
+            const index = +elementTarget?.dataset?.index
+            const newLabelList = [...labels];
+            newLabelList.splice(index, 1)
+            setLabels(newLabelList)
+        }
+    }
+
+    useEffect(()=>{
+        onChange && onChange(labels)
+    },[labels, onChange])
 
     return (
         <>
-            <div className=" border-2  border-blue-400 rounded flex  items-center h-10  text-black px-2">
-                <div className=' inline-flex '>
+            <div className=" border-2  border-blue-400 rounded flex  items-center h-10  text-black px-2 overflow-x-auto">
+                <div className=' inline-flex ' onClick={deleteLabels}>
                     {
-                        labels?.map(i=><div className=' bg-gray-50 mr-1 flex clear-both'>{i} <img src={CloseIcon} alt="" className=' w-5 h-5 cursor-pointer'/></div>)
+                        labels?.map((i, index)=><div className=' bg-gray-100 pl-2 pr-5 py-1 rounded-sm  flex ml-2 whitespace-nowrap'>{i} <img data-index={index} src={CloseIcon} alt="" className=' w-5 h-5 cursor-pointer'/></div>)
                     }
                 </div>
-                <input  onKeyDown={(e)=>{
-                    if(e.key === 'Enter'){
-                        setLabels([...labels, inputValue])
-                        setInputValue('')
-                    }
-                }} type="text" value={inputValue} onChange={(e)=>setInputValue(e.target.value)} placeholder='请输入标签' className=' w-full h-full border-none outline-none' />
+                <div className="inline-flex w-full h-full justify-between">
+                    <input  
+                        onKeyDown={(e)=>{
+                            if(e.key === 'Enter' && inputValue){
+                                setLabels([...labels, ...inputValue.split(";")])
+                                setInputValue('')
+                            }else if(e.key === 'Backspace' && labels?.length>0 && !inputValue){
+                                const newLabelList = [...labels]
+                                newLabelList?.pop()
+                                setLabels(newLabelList)
+                            }
+
+                        }} 
+                        type="text" value={inputValue} onChange={(e)=>setInputValue(e.target.value)} placeholder='请输入标签' 
+                        className=' flex-grow border-none outline-none ml-1' 
+                    />
+                    <img src={CopyIcon} alt="" className=' w-5 cursor-pointer ' onClick={async()=>{
+                        await navigator.clipboard.writeText(labels.join(';'))
+                        message.success('success copied!')
+                    }} />
+                </div>
+
             </div>
         </>
     )
