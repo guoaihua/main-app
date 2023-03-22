@@ -25,7 +25,7 @@ import {
         ]
      },
      {
-        path: 'ideal',
+        path: 'collect_ideal',
         element: <Ideal />
     }
   ])
