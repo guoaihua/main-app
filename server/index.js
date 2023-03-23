@@ -7,6 +7,22 @@ require('dotenv').config()
 const DB = require('./sqlite')
 
 DB.createTable()
+// function getClientIp(req) {
+//     return (
+//       req.headers["x-forwarded-for"] ||
+//       req.connection.remoteAddress ||
+//       req.socket.remoteAddress ||
+//       req.connection.socket.remoteAddress
+//     );
+//   }
+
+//   app.use((req, res, next) => {
+//     console.log("时间", new Date());
+//     console.log("访问地址", req.url);
+//     console.log("f访问ip", getClientIp(req));
+  
+//     next()
+//   })
 
 // 设置静态目录
 app.use('/', express.static(path.resolve(__dirname, '../web/dist/')))
