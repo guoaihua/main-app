@@ -12,14 +12,13 @@ import CloseIcon from '@imgs/close.svg'
 import CopyIcon from '@imgs/copy.svg'
 import { message } from 'antd'
 export interface MakeLabelsProps {
-    onChange?: (labels)=> void
+    labels: string[]
+    setLabels: (props: string[])=>void
 }
 
 const MakeLabels: React.FC<MakeLabelsProps> = (props)=>{
-    const { onChange } = props
-    const [labels, setLabels] = useState([])
+    const {labels, setLabels} = props
     const [inputValue, setInputValue] = useState('')
-
     const deleteLabels = (e)=>{
         const elementTarget = e.target as HTMLElement
         if(elementTarget?.tagName?.toLowerCase() === 'img'){
@@ -29,11 +28,6 @@ const MakeLabels: React.FC<MakeLabelsProps> = (props)=>{
             setLabels(newLabelList)
         }
     }
-
-    useEffect(()=>{
-        onChange && onChange(labels)
-    },[labels, onChange])
-
     return (
         <>
             <div className=" border-2  border-blue-400 rounded flex  items-center h-10  text-black px-2 overflow-x-auto">

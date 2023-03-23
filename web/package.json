@@ -49,6 +49,7 @@
     "dayjs": "^1.11.7",
     "marked": "^4.2.12",
     "postcss": "^8.4.21",
+    "react-hook-form": "^7.43.7",
     "react-router-dom": "^6.9.0",
     "react-svg": "^16.1.5",
     "sass": "^1.58.3",

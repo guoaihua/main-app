@@ -4,7 +4,7 @@ const { resolve } = require('path') //必须要引入resolve
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/ideal/',
   resolve: {
     alias: {
       '@components': resolve(__dirname, 'src', 'components'),

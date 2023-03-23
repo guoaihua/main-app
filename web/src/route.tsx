@@ -28,4 +28,6 @@ import {
         path: 'collect_ideal',
         element: <Ideal />
     }
-  ])
+  ], {
+    basename: '/ideal/'
+  })
