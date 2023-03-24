@@ -4,17 +4,37 @@ import * as Api from '@api/index'
 import Label from "@imgs/label.svg";
 import Time from "@imgs/time.svg";
 import dayjs from 'dayjs'
+import type { PaginationProps } from 'antd';
+import { Pagination } from "antd";
+import {
+  Link,
+  useNavigate
+} from "react-router-dom";
 
 
 /** 主页显示最近列表信息 */
 const HomeCardList = ()=>{
 const [blogList, setBlogList] = useState([])
+const [current, setCurrent] = useState(1)
+const [total, setTotal] = useState(10)
+const navigate = useNavigate()
+const pageSize = 5;
   useEffect(()=>{
     ;(async()=>{
-        const res =  await Api?.GetBlogList()
-        setBlogList(res)
+        const res =  await Api?.GetBlogList({
+          pageSize,
+          order_type: 'desc',
+          current: current-1
+        })
+        setTotal(res.total)
+        setBlogList(res.list)
     })()
-  },[])
+  },[current])
+
+  const onChange: PaginationProps['onChange'] = (page) => {
+    console.log(page);
+    setCurrent(page);
+  };
 
   return (
       <>
@@ -23,7 +43,10 @@ const [blogList, setBlogList] = useState([])
             return (
               <div className='blog_card' key={index}>
                 <h2>{i?.title}</h2>
-                <p className='blog_content'>{i?.content}</p>
+                <div className='blog_content cursor-auto' onClick={()=>{
+                  console.log(i)
+                  navigate('/article_detail')
+                }} dangerouslySetInnerHTML={{__html: i?.parseContent}}/>
                 <div className="blog_footer">
                   <span><img src={Time} alt="" />{dayjs(i?.updateTime)?.format('YYYY-MM-DD')}</span>
                   {
@@ -41,6 +64,7 @@ const [blogList, setBlogList] = useState([])
             )
           })
         }
+        <Pagination total={total} pageSize={pageSize} current={current} onChange={onChange} showTotal={(total) => `Total ${total} items`} />
       </>
   )
 }

@@ -13,6 +13,6 @@ export const AddNewBlog = async (params)=>{
 }
 
 
-export const GetBlogList = async ()=>{
-    return await fetch(domain+'/api/queryBlogs').then(response => response.json())
+export const GetBlogList = async (params={})=>{
+    return await fetch(domain+'/api/queryBlogs?'+ new URLSearchParams(params)).then(response => response.json())
   }

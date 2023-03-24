@@ -41,9 +41,13 @@ app.all('*', (req,res)=>{
 })
 
 app.get('/api/queryBlogs', async (req,res)=>{
+    const { pageSize=10, order_type='asc', current=0 } = req.query
    const result = await new Promise((resolve, reject )=>{
-        DB.queryData('select * from blogs', (rows)=>{
-            resolve(rows)
+        DB.queryData([`select * from blogs order by update_time ${order_type} limit ${pageSize} offset ${current * pageSize}`, 'select * from blogs;'], (rows)=>{
+            resolve({
+                list: rows[0],
+                total: rows[1].length
+            })
         })
     })
     res.send(result)

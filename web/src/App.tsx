@@ -4,13 +4,9 @@ import { Avatar, Menu } from 'antd';
 import personal_avatar from '@imgs/avatar.jpg';
 import type { MenuProps } from 'antd';
 import {
-  RouterProvider,
   Link,
-   Route,
-   Routes, 
    Outlet
 } from "react-router-dom";
-import { router } from "./route";
 
 function App() {
 
@@ -22,7 +18,6 @@ function App() {
         {
             label:  <Link to='collect_ideal'>cool ideal!</Link>,
             key: 'ideal',
-            
         }
     ]
 

@@ -20,18 +20,19 @@ const insertData = function(sql, objects){
         
 }
 
-const queryData = function(sql, callback){
-        db.all(sql, function(err, rows){
+const queryData = function(sqls, callback){
+        db.serialize(async()=>{ 
+            const res = await Promise.all(sqls.map(i => new Promise((resolve, reject) => {
+                db.all(i, function(err, rows){
                 if(null != err){
                      db.printErrorInfo(err);
                      return;
                  }
-          
-                /// deal query data.
-                 if(callback){
-                     callback(rows);
-                 }
-             });
+                 resolve(rows)
+             })
+            })))
+        callback(res)
+        })
 }
 
 

@@ -63,7 +63,7 @@ const Editor = ()=>{
                   message: '请填写标题'
                 }
               ]} className=' ml-10 mb-0'>
-                <Input type='text' className='  rounded border-blue-500 border-solid border-2' />
+                <Input type='text' className=' rounded border-blue-500 border-solid border-2' />
           </Form.Item>
         </div>
         <Form.Item name='inputText' noStyle

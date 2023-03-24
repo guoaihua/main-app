@@ -12,7 +12,7 @@ const CustomerDrawer = ()=>{
         ;(async()=>{
             const res =  await Api?.GetBlogList()
             console.log(res)
-            setBlogList(res)
+            setBlogList(res.list)
         })()
     },[showDrawer])
 
