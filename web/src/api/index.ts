@@ -12,7 +12,10 @@ export const AddNewBlog = async (params)=>{
   }).then(response => response.json())
 }
 
+export const DeleteBlog = async (params) =>{
+  return await fetch(domain + '/api/deleteBlog?' + new URLSearchParams(params)).then(response => response.json())
+}
 
-export const GetBlogList = async (params={})=>{
+export const GetBlogList = async (params={pageSize: '10'})=>{
     return await fetch(domain+'/api/queryBlogs?'+ new URLSearchParams(params)).then(response => response.json())
   }

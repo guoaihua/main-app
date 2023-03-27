@@ -45,7 +45,11 @@ const pageSize = 5;
                 <h2>{i?.title}</h2>
                 <div className='blog_content cursor-auto' onClick={()=>{
                   console.log(i)
-                  navigate('/article_detail')
+                  navigate('/article_detail', {
+                    state: {
+                      articalDetail: i
+                    }
+                  })
                 }} dangerouslySetInnerHTML={{__html: i?.parseContent}}/>
                 <div className="blog_footer">
                   <span><img src={Time} alt="" />{dayjs(i?.updateTime)?.format('YYYY-MM-DD')}</span>

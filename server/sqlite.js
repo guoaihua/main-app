@@ -17,7 +17,6 @@ const insertData = function(sql, objects){
                  }
                  stmt.finalize();
              });
-        
 }
 
 const queryData = function(sqls, callback){
@@ -35,9 +34,13 @@ const queryData = function(sqls, callback){
         })
 }
 
+const deleteData = function(sql, cb){
+    db.run(sql, cb)
+}
 
 module.exports = {
     insertData,
     queryData,
-    createTable
+    createTable,
+    deleteData
 }

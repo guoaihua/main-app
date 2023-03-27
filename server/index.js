@@ -53,6 +53,18 @@ app.get('/api/queryBlogs', async (req,res)=>{
     res.send(result)
 })
 
+app.get('/api/deleteBlog', async (req,res)=>{
+    const { blogId } = req.query
+    DB.deleteData(`delete from blogs where id = ${blogId}`, (err)=>{
+        if(err){
+            console.error(err)
+        }
+        res.send({
+            data: '删除成功'
+        })
+    })
+})
+
 app.post('/api/addBlog', (req, res)=>{
     if(req.body){
         const value = Object.keys(req.body).map( i => req.body[i])

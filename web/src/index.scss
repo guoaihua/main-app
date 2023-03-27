@@ -35,3 +35,27 @@ code {
     "Courier New",
     monospace;
 }
+
+.customer_ellisis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+
+.ant-btn-primary {
+  background-color: #1677ff;
+}
+
+@media (max-width: 1340px) {
+  .personal_info {
+      display: none;
+  }
+  .work_container {
+      width: 100%;
+  }
+}

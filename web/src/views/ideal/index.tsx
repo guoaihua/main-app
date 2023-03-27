@@ -49,12 +49,26 @@ const Editor = ()=>{
       console.log(err)
     })
   }
+
+  const setForm = (data)=>{
+    console.log(data)
+    // 设置表单
+    form.setFieldsValue({
+      inputText: data?.content,
+      title: data?.title
+    });
+    // 设置基本数据
+    setLabels(data?.labels?.split(';'))
+    setParsedData({
+      __html: data?.parseContent
+    })
+  }
     return (
       <Form  form={form} className=' h-full'>
         <div className='app'>
               <div className="input-container">
         <div className="menu" >
-          <Drawer />
+          <Drawer setForm={setForm}/>
           <Form.Item 
             name='title'
             label='标题：' rules={[
@@ -91,7 +105,7 @@ const Editor = ()=>{
         <div className="out-container" >
             <div className="menu ">
                 <MakeLabels labels={labels} setLabels={setLabels}/>
-                <Button className='  rounded-lg font-bold  ml-2 px-4 whitespace-nowrap h-10' onClick={onSubmit}>提交</Button>
+                <Button className=' rounded-lg font-bold  ml-2 px-4 whitespace-nowrap h-10' onClick={onSubmit}>提交</Button>
             </div>
             <div className="render-container" dangerouslySetInnerHTML={parsedData}>
           </div>

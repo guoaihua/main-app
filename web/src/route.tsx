@@ -6,6 +6,7 @@ import {
   } from "react-router-dom";
   import HomeCardList from '@views/home/index';
   import Ideal from '@views/ideal'
+  import ArticalDetail  from "@views/detail";
   import App from './App'
 
   export const router = createBrowserRouter([
@@ -19,8 +20,7 @@ import {
             },
             {
                 path: '/article_detail',
-                element: <>11</>,
-                // lazy: ()=> import('')
+                element: <ArticalDetail />
             }
         ]
      },
