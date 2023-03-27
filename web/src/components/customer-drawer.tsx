@@ -13,7 +13,7 @@ const CustomerDrawer = ({setForm})=>{
     },[showDrawer])
 
     const fetchBlogList = async ()=>{
-        const res =  await Api?.GetBlogList()
+        const res =  await Api?.GetBlogList({})
         console.log(res)
         setBlogList(res.list)
     }
