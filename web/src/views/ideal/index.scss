@@ -19,7 +19,7 @@
     }
     .drawer {
       background: none;
-      border: 2px solid;
+      border: 1px solid;
       border-radius: 0 10px 10px 0;
       padding: 1px 4px;
       left: -5px;
@@ -57,4 +57,17 @@
     padding: 20px 0 0 10px;
   }
 
+}
+
+.line-blink {
+  animation: line ease-in-out  1s infinite;
+}
+
+@keyframes line {
+  0% {
+    border-bottom: 1px solid transparent;
+  }
+  100% {
+    border-bottom: 1px solid #d5cece;
+  }
 }

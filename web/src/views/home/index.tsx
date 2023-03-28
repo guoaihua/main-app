@@ -4,7 +4,7 @@ import * as Api from '@api/index'
 import Label from "@imgs/label.svg";
 import Time from "@imgs/time.svg";
 import dayjs from 'dayjs'
-import type { PaginationProps } from 'antd';
+import { Divider, PaginationProps } from 'antd';
 import { Pagination } from "antd";
 import {
   Link,
@@ -37,13 +37,13 @@ const pageSize = 5;
   };
 
   return (
-      <>
+      <div className='list overflow-y-auto'>
         {
           blogList?.map((i, index)=>{
             return (
-              <div className='blog_card' key={index}>
+              <div className='blog_card m-7' key={index}>
                 <h2>{i?.title}</h2>
-                <div className='blog_content cursor-auto' onClick={()=>{
+                <div className='blog_content cursor-auto text-gray-500' onClick={()=>{
                   console.log(i)
                   navigate('/article_detail', {
                     state: {
@@ -51,25 +51,28 @@ const pageSize = 5;
                     }
                   })
                 }} dangerouslySetInnerHTML={{__html: i?.parseContent}}/>
-                <div className="blog_footer">
+                <div className="blog_footer text-gray-500">
                   <span><img src={Time} alt="" />{dayjs(i?.updateTime)?.format('YYYY-MM-DD')}</span>
                   {
-                    i?.labels?.split(',')?.map((items,labelIndex) => {
+                    i?.labels?.split(';')?.map((items,labelIndex) => {
                     return (
                       <span key={labelIndex}>
-                        <img src={Label} alt="" />
+                        <img src={Label} className='w-3 mr-1' alt="" />
                         {items}
                       </span>)
                     })
                   }
                   <span className='text_number'>一共{i?.content?.length}字，读完大约{(i?.content?.length/400)?.toFixed(2)}分钟</span>
                 </div>
+                 <Divider />
               </div>
             )
           })
         }
-        <Pagination total={total} pageSize={pageSize} current={current} onChange={onChange} showTotal={(total) => `Total ${total} items`} />
-      </>
+       {
+        total>10 && <Pagination className=' m-7 ' total={total} pageSize={pageSize} current={current} onChange={onChange} showTotal={(total) => `Total ${total} items`} />
+       } 
+      </div>
   )
 }
 export default HomeCardList

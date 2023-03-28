@@ -1,13 +1,21 @@
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import './index.scss'
 
 const ArticalDetail = ()=>{
     const location = useLocation()
+    const blogInfo = location?.state?.articalDetail
     console.log(location?.state)
+    useEffect(()=>{
+      const ele = document?.querySelector('.App .personal_info');
+      console.log(ele)
+    
+    }, [])
     return (
-        <>
-          {location?.state?.articalDetail?.parseContent &&  <div  dangerouslySetInnerHTML={{__html: location?.state?.articalDetail?.parseContent}}/>}
-        </>
+        <div className=" flex items-center justify-center p-5 flex-col">
+          <h1>{blogInfo?.title}</h1>
+          {blogInfo?.parseContent &&  <div  dangerouslySetInnerHTML={{__html: blogInfo.parseContent}}/>}
+        </div>
     )
 }
 

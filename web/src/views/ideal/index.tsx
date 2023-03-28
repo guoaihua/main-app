@@ -77,7 +77,11 @@ const Editor = ()=>{
                   message: '请填写标题'
                 }
               ]} className=' ml-10 mb-0'>
-                <Input type='text' className=' rounded border-blue-500 border-solid border-2' />
+                <Input type='text' className=' rounded-none p-0' style={{
+                  boxShadow: 'none',
+                  border: 'none',
+                  borderBottom: '1px solid #d5cece'
+                }} />
           </Form.Item>
         </div>
         <Form.Item name='inputText' noStyle
@@ -93,7 +97,7 @@ const Editor = ()=>{
                     __html: marked.parse(e.target?.value)
                   })
                 }}
-                placeholder="Controlled autosize"
+                placeholder="输入markdown 格式文档"
                 style={{
                   height: '100%',
                   resize: 'none'

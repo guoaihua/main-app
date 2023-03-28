@@ -10,9 +10,18 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        border: 1px solid #ccc;
+        border-right: 1px solid #ccc;
     }
     .work_container {
         width: 70%;
+    }
+
+    .hide_person {
+        &.personal_info {
+            display: none;
+        }
+        &~.work_container {
+            width: 100%;
+        }
     }
   }

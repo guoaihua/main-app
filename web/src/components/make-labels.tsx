@@ -30,7 +30,7 @@ const MakeLabels: React.FC<MakeLabelsProps> = (props)=>{
     }
     return (
         <>
-            <div className=" border-2  border-blue-400 rounded flex  items-center h-10  text-black px-2 overflow-x-auto">
+            <div className="border-indigo-300 rounded flex  items-center h-10  text-black px-2 overflow-x-auto" style={{borderWidth: '1px'}}>
                 <div className=' inline-flex ' onClick={deleteLabels}>
                     {
                         labels?.map((i, index)=><div className=' bg-gray-100 pl-2 pr-5 py-1 rounded-sm  flex ml-2 whitespace-nowrap'>{i} <img data-index={index} src={CloseIcon} alt="" className=' w-5 h-5 cursor-pointer'/></div>)
