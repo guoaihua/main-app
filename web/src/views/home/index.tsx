@@ -52,7 +52,7 @@ const pageSize = 5;
                   })
                 }} dangerouslySetInnerHTML={{__html: i?.parseContent}}/>
                 <div className="blog_footer text-gray-500">
-                  <span><img src={Time} alt="" />{dayjs(i?.updateTime)?.format('YYYY-MM-DD')}</span>
+                  <span><img src={Time} alt="" />{dayjs(i?.update_time)?.format('YYYY-MM-DD')}</span>
                   {
                     i?.labels?.split(';')?.map((items,labelIndex) => {
                     return (

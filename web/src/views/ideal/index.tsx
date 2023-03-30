@@ -63,58 +63,59 @@ const Editor = ()=>{
       __html: data?.parseContent
     })
   }
+
+
     return (
       <Form  form={form} className=' h-full'>
         <div className='app'>
-              <div className="input-container">
-        <div className="menu" >
-          <Drawer setForm={setForm}/>
-          <Form.Item 
-            name='title'
-            label='标题：' rules={[
-                {
-                  required: true,
-                  message: '请填写标题'
-                }
-              ]} className=' ml-10 mb-0'>
-                <Input type='text' className=' rounded-none p-0' style={{
-                  boxShadow: 'none',
-                  border: 'none',
-                  borderBottom: '1px solid #d5cece'
-                }} />
-          </Form.Item>
-        </div>
-        <Form.Item name='inputText' noStyle
-         rules={[
-              {
-                required: true,
-                message: '请填写内容'
-              }
-            ]} >
-            <Input.TextArea   
-            onChange = {(e)=>{
-                  setParsedData({
-                    __html: marked.parse(e.target?.value)
-                  })
-                }}
-                placeholder="输入markdown 格式文档"
-                style={{
-                  height: '100%',
-                  resize: 'none'
-                }}
-              />
-        </Form.Item>
-  
-      </div>
-        <div className="out-container" >
-            <div className="menu ">
-                <MakeLabels labels={labels} setLabels={setLabels}/>
-                <Button className=' rounded-lg font-bold  ml-2 px-4 whitespace-nowrap h-10' onClick={onSubmit}>提交</Button>
+          <div className="input-container">
+            <div className="menu" >
+              <Drawer setForm={setForm}/>
+              <Form.Item 
+                name='title'
+                label='标题：' rules={[
+                    {
+                      required: true,
+                      message: '请填写标题'
+                    }
+                  ]} className=' ml-10 mb-0'>
+                    <Input type='text' className=' rounded-none p-0' style={{
+                      boxShadow: 'none',
+                      border: 'none',
+                      borderBottom: '1px solid #d5cece'
+                    }} />
+              </Form.Item>
             </div>
-            <div className="render-container" dangerouslySetInnerHTML={parsedData}>
+            <Form.Item name='inputText' noStyle
+            rules={[
+                  {
+                    required: true,
+                    message: '请填写内容'
+                  }
+                ]} >
+                <Input.TextArea   
+                onChange = {(e)=>{
+                      setParsedData({
+                        __html: marked.parse(e.target?.value)
+                      })
+                    }}
+                    placeholder="输入markdown 格式文档"
+                    style={{
+                      resize: 'none'
+                    }}
+                    className='inputText'
+                  />
+            </Form.Item>
+          </div>
+          <div className="out-container" >
+              <div className="menu ">
+                  <MakeLabels labels={labels} setLabels={setLabels}/>
+                  <Button className=' rounded-lg font-bold  ml-2 px-4 whitespace-nowrap h-10' onClick={onSubmit}>提交</Button>
+              </div>
+              <div className="render-container overflow-y-scroll" dangerouslySetInnerHTML={parsedData}>
+            </div>
           </div>
         </div>
-      </div>
       </Form>
 
     )

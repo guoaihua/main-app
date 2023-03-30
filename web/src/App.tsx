@@ -23,14 +23,14 @@ function App() {
     ]
 
   return (
-    <div className="App">
+    <div className="App via-gray-300">
       <div className={`personal_info ${location.pathname === '/article_detail' ? 'hide_person' : ''}`}>
         <Avatar size={200} src={personal_avatar} />
         <h1>Ziming Home</h1>
         <p>这是一个自由的空间</p>
       </div>
       <div className="work_container">
-        <Menu items={menuItems} mode='horizontal' className=' sticky top-0'/>
+        <Menu items={menuItems} mode='horizontal' className=' sticky top-0 font-bold'/>
         <Outlet />
       </div>
     </div>

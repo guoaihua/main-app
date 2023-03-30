@@ -43,18 +43,21 @@
   .out-container {
     width: 50%;
     height: 100%;
+    overflow: hidden;
   }
   
   .input-container textarea {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 55px);
     border: none;
     outline: none;
     box-shadow: none;
+    overflow-y: scroll;
   }
 
   .render-container {
     padding: 20px 0 0 10px;
+    height: calc(100% - 55px);
   }
 
 }
