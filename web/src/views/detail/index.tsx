@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import './index.scss'
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import MarkNav from 'markdown-navbar';
+import 'markdown-navbar/dist/navbar.css';
 
 const ArticalDetail = ()=>{
     const location = useLocation()
