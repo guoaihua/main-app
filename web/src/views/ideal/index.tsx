@@ -64,6 +64,50 @@ const Editor = ()=>{
     })
   }
 
+  useEffect(()=>{
+    const inputTextEle = document.querySelector('.inputText')
+    const renderContainerEle = document.querySelector('.render-container')
+
+    const renderContainerScrollHandler = (e)=>{
+      const ratio = (e.target as HTMLElement)?.scrollTop / (renderContainerEle.scrollHeight - renderContainerEle.clientHeight)
+      inputTextEle.scrollTo({
+        left: 0,
+        top: (inputTextEle.scrollHeight - inputTextEle.clientHeight) * ratio ,
+      })
+    }
+
+    const inputTextScrollHandler = (e)=>{
+      const ratio = (e.target as HTMLElement)?.scrollTop / (inputTextEle.scrollHeight - inputTextEle.clientHeight)
+      renderContainerEle.scrollTo({
+        left: 0,
+        top: (renderContainerEle.scrollHeight - renderContainerEle.clientHeight) * ratio ,
+      })
+    }
+
+    inputTextEle.addEventListener('mouseenter', ()=>{
+      renderContainerEle.removeEventListener('scroll', renderContainerScrollHandler)
+    })
+    inputTextEle.addEventListener('mouseleave', ()=>{
+      renderContainerEle.addEventListener('scroll', renderContainerScrollHandler)
+    })
+    inputTextEle.addEventListener('scroll',inputTextScrollHandler)
+
+    
+
+    renderContainerEle.addEventListener('mouseenter', ()=>{
+      inputTextEle.removeEventListener('scroll', inputTextScrollHandler)
+    })
+    renderContainerEle.addEventListener('mouseleave', ()=>{
+      inputTextEle.addEventListener('scroll', inputTextScrollHandler)
+    })
+    renderContainerEle.addEventListener('scroll', renderContainerScrollHandler)
+
+    return ()=>{
+      inputTextEle.removeEventListener('scroll', inputTextScrollHandler)
+      renderContainerEle.removeEventListener('scroll', renderContainerScrollHandler)
+    }
+  },[])
+
 
     return (
       <Form  form={form} className=' h-full'>
