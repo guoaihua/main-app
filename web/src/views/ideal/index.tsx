@@ -7,6 +7,12 @@ import Drawer from '@components/customer-drawer'
 import  * as Api from '../../api/index'
 import MakeLabels from '@components/make-labels';
 import { Form, Input, message, Button } from 'antd'
+import HomeSvg from '@imgs/home.svg'
+import {
+  Link,
+   Outlet,
+   useLocation
+} from "react-router-dom";
 
 type formProps = {
   inputText: string
@@ -26,9 +32,10 @@ const Editor = ()=>{
 
   
   const onSubmit = async ()=>{
-    console.log(111)
     form.validateFields().then(async(values)=>{
-      if(values && parsedData){
+      if(!parsedData || labels.length < 1 ){
+        throw new Error('效验失败')
+      }
         const res = await Api?.AddNewBlog({
           title: values?.title,
           content: values?.inputText,
@@ -44,9 +51,9 @@ const Editor = ()=>{
             __html: ''
           })
         }
-      }
     }).catch(err=>{
       console.log(err)
+      message.error('请填写完表单内容！')
     })
   }
 
@@ -111,25 +118,29 @@ const Editor = ()=>{
 
     return (
       <Form  form={form} className=' h-full'>
-        <div className='app'>
+        <div className='app flex flex-wrap'>
+          <div className="header w-full flex h-10 bg-slate-300">
+                <Link to='..' className=' flex items-center font-bold cursor-pointer '>
+                  <img src={HomeSvg} className=' w-5' alt="" />
+                  主页
+                </Link>
+                <Drawer setForm={setForm}/>
+                <Form.Item 
+                  name='title'
+                  label='标题：' className=' font-bold mx-2 flex h-full items-center'>
+                      <Input type='text' className='rounded-none h-full bg-inherit' style={{
+                        boxShadow: 'none',
+                        border: 'none',
+                        borderBottom: '1px solid #7d7878'
+                      }} />
+                </Form.Item>
+                <span className=' flex items-center font-bold'>
+                   标签: &nbsp;
+                   <MakeLabels labels={labels} setLabels={setLabels} maxWidth='250px'/>
+                </span>
+                  <span className=' rounded-lg ml-2 px-4 whitespace-nowrap h-10 leading-10 text-black font-bold cursor-pointer' onClick={onSubmit}>提交</span>
+          </div>
           <div className="input-container">
-            <div className="menu" >
-              <Drawer setForm={setForm}/>
-              <Form.Item 
-                name='title'
-                label='标题：' rules={[
-                    {
-                      required: true,
-                      message: '请填写标题'
-                    }
-                  ]} className=' ml-10 mb-0'>
-                    <Input type='text' className=' rounded-none p-0' style={{
-                      boxShadow: 'none',
-                      border: 'none',
-                      borderBottom: '1px solid #d5cece'
-                    }} />
-              </Form.Item>
-            </div>
             <Form.Item name='inputText' noStyle
             rules={[
                   {
@@ -152,10 +163,6 @@ const Editor = ()=>{
             </Form.Item>
           </div>
           <div className="out-container" >
-              <div className="menu ">
-                  <MakeLabels labels={labels} setLabels={setLabels}/>
-                  <Button className=' rounded-lg font-bold  ml-2 px-4 whitespace-nowrap h-10' onClick={onSubmit}>提交</Button>
-              </div>
               <div className="render-container overflow-y-scroll" dangerouslySetInnerHTML={parsedData}>
             </div>
           </div>

@@ -13,7 +13,7 @@ function App() {
   const location = useLocation()
     const menuItems: MenuProps['items'] = [
         {
-            label: <Link to='./'>主页</Link>,
+            label: <Link to='/'>主页</Link>,
             key: 'home',
         },
         {

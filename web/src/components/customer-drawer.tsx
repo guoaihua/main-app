@@ -48,8 +48,11 @@ const CustomerDrawer = ({setForm})=>{
 
     return (
         <>
-        <ReactSVG className='drawer' src={BookSvg} onClick={toggle}/> 
-     <Drawer title="文章列表" placement="right" onClose={setLeft} open={showDrawer}>
+        <span className='flex items-center cursor-pointer font-bold mx-2' onClick={toggle}>
+                <ReactSVG className='drawer' src={BookSvg} /> 
+                    查看全部
+        </span>
+        <Drawer title="文章列表" placement="right" onClose={setLeft} open={showDrawer}>
         {
             blogList?.map((i, index)=>{
                 return (

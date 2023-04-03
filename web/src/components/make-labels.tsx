@@ -13,11 +13,12 @@ import CopyIcon from '@imgs/copy.svg'
 import { message } from 'antd'
 export interface MakeLabelsProps {
     labels: string[]
+    maxWidth?: string
     setLabels: (props: string[])=>void
 }
 
 const MakeLabels: React.FC<MakeLabelsProps> = (props)=>{
-    const {labels, setLabels} = props
+    const {labels, setLabels, maxWidth} = props
     const [inputValue, setInputValue] = useState('')
     const deleteLabels = (e)=>{
         const elementTarget = e.target as HTMLElement
@@ -30,10 +31,10 @@ const MakeLabels: React.FC<MakeLabelsProps> = (props)=>{
     }
     return (
         <>
-            <div className="border-indigo-300 rounded flex  items-center h-10  text-black px-2 overflow-x-auto" style={{borderWidth: '1px'}}>
+            <div className="border-indigo-300 rounded flex  items-center h-10  text-black px-2 overflow-x-auto" style={{borderWidth: '1px', maxWidth}}>
                 <div className=' inline-flex ' onClick={deleteLabels}>
                     {
-                        labels?.map((i, index)=><div className=' bg-gray-100 pl-2 pr-5 py-1 rounded-sm  flex ml-2 whitespace-nowrap'>{i} <img data-index={index} src={CloseIcon} alt="" className=' w-5 h-5 cursor-pointer'/></div>)
+                        labels?.map((i, index)=><div className=' bg-gray-200 pl-2 pr-5 py-1 rounded-sm  flex ml-2 whitespace-nowrap'>{i} <img data-index={index} src={CloseIcon} alt="" className=' w-5 h-5 cursor-pointer'/></div>)
                     }
                 </div>
                 <div className="inline-flex w-full h-full justify-between">
@@ -50,7 +51,7 @@ const MakeLabels: React.FC<MakeLabelsProps> = (props)=>{
 
                         }} 
                         type="text" value={inputValue} onChange={(e)=>setInputValue(e.target.value)} placeholder='请输入标签' 
-                        className=' flex-grow border-none outline-none ml-1' 
+                        className=' flex-grow border-none outline-none ml-1 bg-inherit' 
                     />
                     <img src={CopyIcon} alt="" className=' w-5 cursor-pointer ' onClick={async()=>{
                         await navigator.clipboard.writeText(labels.join(';'))
