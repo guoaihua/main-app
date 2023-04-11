@@ -29,6 +29,7 @@ const Editor = ()=>{
     const [parsedData, setParsedData] = useState({
       __html: ''
     })
+    const [isUpdate, setIsUpDate] = useState()
 
   
   const onSubmit = async ()=>{
@@ -36,13 +37,27 @@ const Editor = ()=>{
       if(!parsedData || labels.length < 1 ){
         throw new Error('效验失败')
       }
-        const res = await Api?.AddNewBlog({
-          title: values?.title,
-          content: values?.inputText,
-          parseContent: parsedData.__html,
-          labels: labels.join(';'),
-          updateTime: Date.now()
-        })
+      let res
+      console.log(isUpdate);
+      
+        if(isUpdate){
+          res = await Api?.updateBlog({
+            id: isUpdate,
+            title: values?.title,
+            content: values?.inputText,
+            parseContent: parsedData.__html,
+            labels: labels.join(';'),
+            updateTime: Date.now()
+          })
+        }else {
+          res = await Api?.AddNewBlog({
+            title: values?.title,
+            content: values?.inputText,
+            parseContent: parsedData.__html,
+            labels: labels.join(';'),
+            updateTime: Date.now()
+          })
+        }
         if(res){
           message.success('保存成功')
           form.resetFields()
@@ -57,7 +72,7 @@ const Editor = ()=>{
     })
   }
 
-  const setForm = (data)=>{
+  const setForm = (data, isUpdate)=>{
     console.log(data)
     // 设置表单
     form.setFieldsValue({
@@ -69,6 +84,7 @@ const Editor = ()=>{
     setParsedData({
       __html: data?.parseContent
     })
+    isUpdate && setIsUpDate(data.id)
   }
 
   useEffect(()=>{

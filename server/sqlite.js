@@ -19,6 +19,10 @@ const insertData = function(sql, objects){
              });
 }
 
+const updateData = function(sql, callback){
+    db.run(sql, callback)
+}
+
 const queryData = function(sqls, callback){
         db.serialize(async()=>{ 
             const res = await Promise.all(sqls.map(i => new Promise((resolve, reject) => {
@@ -42,5 +46,6 @@ module.exports = {
     insertData,
     queryData,
     createTable,
-    deleteData
+    deleteData,
+    updateData
 }

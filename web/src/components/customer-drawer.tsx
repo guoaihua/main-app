@@ -35,7 +35,7 @@ const CustomerDrawer = ({setForm})=>{
 
         const editBlog = ()=>{
             console.log(setForm)
-            setForm(data)
+            setForm(data, true)
             setLeft()
         }
         return (

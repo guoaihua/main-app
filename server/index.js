@@ -57,7 +57,7 @@ app.get('/api/deleteBlog', async (req,res)=>{
     const { blogId } = req.query
     DB.deleteData(`delete from blogs where id = ${blogId}`, (err)=>{
         if(err){
-            console.error(err)
+          return  console.error(err)
         }
         res.send({
             data: '删除成功'
@@ -70,6 +70,21 @@ app.post('/api/addBlog', (req, res)=>{
         const value = Object.keys(req.body).map( i => req.body[i])
         DB.insertData('insert into blogs(title, content, parseContent, labels, update_time) values(?,?,?,?,?)', [value])
         res.send(value)
+    }
+})
+
+app.post('/api/updateBlog', (req, res)=>{
+    if(req.body){
+        const value = req.body
+        console.log(value)
+        DB.updateData(`update blogs set title='${value.title}',content='${value.content}', parseContent='${value.parseContent}', labels='${value.labels}', update_time=${value.updateTime} where id=${value.id};`, (err)=>{
+            if(err){
+             return  console.error(err)
+            }
+            res.send({
+                data: '修改成功'
+            })
+        })
     }
 })
 

@@ -12,6 +12,17 @@ export const AddNewBlog = async (params)=>{
   }).then(response => response.json())
 }
 
+export const updateBlog = async (params)=>{
+  return await fetch(domain + '/api/updateBlog', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: JSON.stringify(params)
+  }).then(response => response.json())
+}
+
 export const DeleteBlog = async (params) =>{
   return await fetch(domain + '/api/deleteBlog?' + new URLSearchParams(params)).then(response => response.json())
 }
