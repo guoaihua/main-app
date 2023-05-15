@@ -3,7 +3,8 @@ import BookSvg from '../imgs/book.svg'
 import { useToggle } from 'ahooks';
 import { Drawer, Divider, Modal} from 'antd'
 import * as Api from '../api'
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import BlogList from './drawer-blog-list';
 
 const CustomerDrawer = ({setForm})=>{
     const [showDrawer, {toggle, setLeft}] = useToggle()
@@ -18,7 +19,7 @@ const CustomerDrawer = ({setForm})=>{
         setBlogList(res.list)
     }
 
-    const Tools = ({data})=>{
+    const Tools = useCallback(({data})=>{
         const deleteBlog = ()=>{
           const modal = Modal.confirm({
                 title: '是否确定删除？',
@@ -44,7 +45,10 @@ const CustomerDrawer = ({setForm})=>{
                 <button className=' bg-blue-300 px-2 py-1 text-white rounded' onClick={editBlog}>编辑</button>
             </div>
         )
-    }
+    },[])
+
+
+
 
     return (
         <>
@@ -52,18 +56,9 @@ const CustomerDrawer = ({setForm})=>{
                 <ReactSVG className='drawer' src={BookSvg} /> 
                     查看全部
         </span>
-        <Drawer title="文章列表" placement="right" onClose={setLeft} open={showDrawer}>
-        {
-            blogList?.map((i, index)=>{
-                return (
-                <div key={index}>
-                    <h1 className='flex justify-between items-center'>{i?.title} <Tools data={i}/></h1>
-                    <p className='customer_ellisis leading-5 '>{i?.content}</p>
-                    <Divider />
-                </div>)
-            })
-        }
-      </Drawer>
+        <Drawer title="文章列表" placement="right" onClose={setLeft} open={showDrawer} >
+            <BlogList blogList={blogList} Tools={Tools}/>
+        </Drawer>
         </>
     )
 }
